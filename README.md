@@ -10,39 +10,39 @@ Before starting the python program, install the dependencies. To do this all at 
 Before the program will work, you need to add the Google Drive API. To do this, create a free project in Google Cloud Console, then follow these steps.
 
 Step One:
-[./instructions/stepone.png]
+![image](./instructions/stepone.png)
 
 Click "APIs and Services" on the main screen
 
 Step Two:
-[./instructions/steptwo.png]
+![image](./instructions/steptwo.png)
 
 Search for "Google Drive API" and click on it.
 
 Step Three:
-[./instructions/stepthree.png]
+![image](./instructions/stepthree.png)
 
 Click "Turn On". In the screenshot above, it says "Manage" as I already have it active.
 
 Step Four:
-[./instructions/stepfour.png]
+![image](./instructions/stepfour.png)
 
 Follow the three steps in the image, first clicking back, then selecting the "Credentials" tab.
 Next, click "Create Credentials".
 Then, select "OAuth client ID"
 
 Step Five:
-[./instructions/stepfive.png]
+![image](./instructions/stepfive.png)
 
 Now, select "Desktop app" under "Application type", and name it whatever you want. Here I named it "Converter"
 
 Step Six:
-[./instructions/stepsix.png]
+![image](./instructions/stepsix.png)
 
 Then click "DOWNLOAD JSON" to download the credentials you just created.
 
 Step Seven:
-[./instructions/stepseven.png]
+![image](./instructions/stepseven.png)
 
 Lastly, rename the downloaded .json file to "credentials.json" and place it next to the python script.
 

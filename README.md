@@ -66,14 +66,18 @@ You're now ready to use the program!
 
 ![Step Seven](./instructions/program.png)  
 
-After setting up the credentials, run the script, and a GUI will appear. The GUI allows you to:
+After setting up the credentials and installing dependencies, run the python script **`convert.py`**, and a GUI will appear. The GUI allows you to:
 
 - **Select Input Folder**: Choose the folder containing your `.gdoc`, `.gsheet`, or `.gslides` files.
 - **Select Output Folder**: Choose where you want to save the converted files.
 - **Conversion Options**: Choose which file types you want to convert (Google Docs, Sheets, or Slides). By default, all options are selected.
 - **Search Subfolders**: If enabled, the program will search through subfolders and preserve the original folder structure when saving the converted files.
 
+- **Watch the Progress**: Above the run button is a console that shows the progress of files being converted.
+
 Simply click **Run**, and the program will convert all selected Google file types to their respective Microsoft Office formats.
+
+The GUI allow includes error handling for files that are too large for the API. These will be named in the console. 
 
 ## First-Time Setup Warning
 

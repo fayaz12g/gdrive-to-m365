@@ -1,49 +1,86 @@
-# gdrive-to-m365
- A converter for Google Drive gdocs, gslides, and gsheets files to Microsoft Office file types docx, pptx, and xlsx
+# gdrive-to-m365  
+**A converter for Google Docs, Sheets, and Slides files to Microsoft Office formats (DOCX, XLSX, PPTX)**
 
+## Overview
 
-This is an awesome program that converts the Google Drive synced files to things you can open in any Microsoft app by downloading them all at once, even if you aren't the owner!
+This program helps you convert Google Drive files (Google Docs, Sheets, and Slides) into Microsoft Office-compatible formats (DOCX, XLSX, and PPTX). It automates downloading these files, even if you're not the owner, allowing you to work with them in Microsoft Office applications like Word, Excel, and PowerPoint.
 
-Before starting the python program, install the dependencies. To do this all at once, run: pip install customtkinter google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+The app features a user-friendly GUI with options to:
+- Convert Google Docs to DOCX
+- Convert Google Sheets to XLSX
+- Convert Google Slides to PPTX
+- Search through subfolders and preserve folder structure during conversion
 
+## Installation
 
-Before the program will work, you need to add the Google Drive API. To do this, create a free project in Google Cloud Console, then follow these steps.
+Before running the program, ensure you have all the necessary dependencies installed. You can install them by running the following command:
 
-Step One:
-![image](./instructions/stepone.png)
+```bash
+pip install customtkinter google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+```
 
-Click "APIs and Services" on the main screen
+## Google API Setup
 
-Step Two:
-![image](./instructions/steptwo.png)
+Before using the program, you need to enable the **Google Drive API** and create the necessary credentials. Follow these steps to set it up:
 
-Search for "Google Drive API" and click on it.
+### Step 1: Enable Google Drive API
 
-Step Three:
-![image](./instructions/stepthree.png)
+![Step One](./instructions/stepone.png)  
+From the Google Cloud Console, click on **"APIs & Services"** from the main dashboard.
 
-Click "Turn On". In the screenshot above, it says "Manage" as I already have it active.
+### Step 2: Search for Google Drive API
 
-Step Four:
-![image](./instructions/stepfour.png)
+![Step Two](./instructions/steptwo.png)  
+Search for **"Google Drive API"** and click on it.
 
-Follow the three steps in the image, first clicking back, then selecting the "Credentials" tab.
-Next, click "Create Credentials".
-Then, select "OAuth client ID"
+### Step 3: Activate the API
 
-Step Five:
-![image](./instructions/stepfive.png)
+![Step Three](./instructions/stepthree.png)  
+Click **"Enable"** to activate the API. If you've already activated it, you'll see "Manage."
 
-Now, select "Desktop app" under "Application type", and name it whatever you want. Here I named it "Converter"
+### Step 4: Create OAuth Credentials
 
-Step Six:
-![image](./instructions/stepsix.png)
+![Step Four](./instructions/stepfour.png)  
+1. Navigate back to the **"APIs & Services"** page.
+2. Click the **"Credentials"** tab.
+3. Select **"Create Credentials"** and choose **"OAuth Client ID"**.
 
-Then click "DOWNLOAD JSON" to download the credentials you just created.
+### Step 5: Choose Application Type
 
-Step Seven:
-![image](./instructions/stepseven.png)
+![Step Five](./instructions/stepfive.png)  
+Under **Application Type**, select **"Desktop App"**. Name it however you like (e.g., "Converter").
 
-Lastly, rename the downloaded .json file to "credentials.json" and place it next to the python script.
+### Step 6: Download the Credentials
 
-And then you're done! It will work. 
+![Step Six](./instructions/stepsix.png)  
+Once created, click **"Download JSON"** to download the OAuth credentials.
+
+### Step 7: Save Credentials
+
+![Step Seven](./instructions/stepseven.png)  
+Rename the downloaded JSON file to **`credentials.json`** and place it in the same directory as the Python script.
+
+You're now ready to use the program!
+
+## Running the Program
+
+After setting up the credentials, run the script, and a GUI will appear. The GUI allows you to:
+
+- **Select Input Folder**: Choose the folder containing your `.gdoc`, `.gsheet`, or `.gslides` files.
+- **Select Output Folder**: Choose where you want to save the converted files.
+- **Conversion Options**: Choose which file types you want to convert (Google Docs, Sheets, or Slides). By default, all options are selected.
+- **Search Subfolders**: If enabled, the program will search through subfolders and preserve the original folder structure when saving the converted files.
+
+Simply click **Run**, and the program will convert all selected Google file types to their respective Microsoft Office formats.
+
+## First-Time Setup Warning
+
+During the first run, you might see a warning like this:
+
+![Notice](./instructions/notice.png)
+
+This is expected since your app is in testing mode. Click **"Continue"** and proceed to sign in with your Google account. This process is required to generate the necessary authentication files (`token.json`). You will only need to do this once.
+
+## Notes
+- You **cannot distribute** the generated `token.json` file with the program, as it contains user-specific credentials. Each user needs to generate their own token after authenticating.
+- The program supports batch conversion, making it ideal for users who want to move multiple Google Drive files into Microsoft Office quickly and efficiently.

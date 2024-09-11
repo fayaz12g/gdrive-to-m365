@@ -13,6 +13,10 @@ from google.auth.transport.requests import Request
 # If modifying these SCOPES, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
+# Get the absolute path of the current script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+credentials_path = os.path.join(script_dir, 'credentials.json')
+
 # Authenticate and build the Google Drive API client
 def authenticate_google_drive():
     creds = None
@@ -22,7 +26,7 @@ def authenticate_google_drive():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(credentials_path, SCOPES)
             creds = flow.run_local_server(port=0)
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
@@ -112,19 +116,13 @@ ctk.set_default_color_theme("dark-blue")
 
 app = ctk.CTk()
 app.title("Google File Converter")
-app.geometry("500x400")
+app.geometry("500x600")
 
 # Input folder selection
 input_folder_var = ctk.StringVar()
 ctk.CTkLabel(app, text="Input Folder:").pack(pady=10)
 ctk.CTkEntry(app, textvariable=input_folder_var, width=400).pack(pady=5)
 ctk.CTkButton(app, text="Browse", command=browse_input_folder).pack(pady=5)
-
-# Output folder selection
-output_folder_var = ctk.StringVar()
-ctk.CTkLabel(app, text="Output Folder:").pack(pady=10)
-ctk.CTkEntry(app, textvariable=output_folder_var, width=400).pack(pady=5)
-ctk.CTkButton(app, text="Browse", command=browse_output_folder).pack(pady=5)
 
 # Checkboxes for file type conversions
 convert_gdocs = ctk.BooleanVar(value=True)
@@ -136,6 +134,12 @@ ctk.CTkCheckBox(app, text="Convert Google Docs to DOCX", variable=convert_gdocs)
 ctk.CTkCheckBox(app, text="Convert Google Sheets to XLSX", variable=convert_gsheets).pack(pady=5)
 ctk.CTkCheckBox(app, text="Convert Google Slides to PPTX", variable=convert_gslides).pack(pady=5)
 ctk.CTkCheckBox(app, text="Search Subfolders", variable=search_subfolders).pack(pady=5)
+
+# Output folder selection
+output_folder_var = ctk.StringVar()
+ctk.CTkLabel(app, text="Output Folder:").pack(pady=10)
+ctk.CTkEntry(app, textvariable=output_folder_var, width=400).pack(pady=5)
+ctk.CTkButton(app, text="Browse", command=browse_output_folder).pack(pady=5)
 
 # Run button
 ctk.CTkButton(app, text="Run", command=run_conversion).pack(pady=20)

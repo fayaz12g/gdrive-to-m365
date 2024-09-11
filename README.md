@@ -64,6 +64,8 @@ You're now ready to use the program!
 
 ## Running the Program
 
+![Step Seven](./instructions/program.png)  
+
 After setting up the credentials, run the script, and a GUI will appear. The GUI allows you to:
 
 - **Select Input Folder**: Choose the folder containing your `.gdoc`, `.gsheet`, or `.gslides` files.

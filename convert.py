@@ -14,9 +14,15 @@ from google.auth.transport.requests import Request
 # If modifying these SCOPES, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
+# Declare the label globally at the top of your script
+finished_label = None
+
 # Get the absolute path of the current script
 script_dir = os.path.dirname(os.path.abspath(__file__))
 credentials_path = os.path.join(script_dir, 'credentials.json')
+
+# Load custom theme
+red_theme = os.path.join(script_dir, "red_theme.json")  # Path to the theme file
 
 # Authenticate and build the Google Drive API client
 def authenticate_google_drive():
@@ -93,6 +99,11 @@ def process_gfiles_in_folder(input_folder, output_folder, subfolder_mode, drive_
                 except Exception as e:
                     console_log(f"Skipping {file_name}: {str(e)}")
 
+    # Display the finished message using a label with custom styling
+    finished_label.configure(text="Conversion Finished Successfully!", text_color="red", font=("Helvetica", 18, "bold"))
+    finished_label.pack(pady=10)
+    console_log("Conversion finished successfully.")  # Normal console log message
+
 # Console log for the GUI (display messages)
 def console_log(message):
     console_textbox.configure(state='normal')
@@ -115,20 +126,23 @@ def run_conversion():
 
     # Start processing files in a new thread to prevent freezing
     threading.Thread(target=process_gfiles_in_folder, args=(input_folder, output_folder, subfolder_mode, drive_service)).start()
+    run_button.pack_forget()
     console_log("Conversion started...")
 
 # GUI Setup
 def browse_input_folder():
     folder_selected = filedialog.askdirectory()
     input_folder_var.set(folder_selected)
+    run_button.pack()
 
 def browse_output_folder():
     folder_selected = filedialog.askdirectory()
     output_folder_var.set(folder_selected)
+    run_button.pack()
 
 # Initialize customtkinter and create the GUI
 ctk.set_appearance_mode("system")
-ctk.set_default_color_theme("dark-blue")
+ctk.set_default_color_theme(red_theme)
 
 app = ctk.CTk()
 app.title("Google File Converter")
@@ -161,7 +175,12 @@ ctk.CTkButton(app, text="Browse", command=browse_output_folder).pack(pady=5)
 console_textbox = ctk.CTkTextbox(app, width=400, height=200, state='disabled')
 console_textbox.pack(pady=10)
 
+# In the GUI setup, create the finished label but keep it initially invisible
+finished_label = ctk.CTkLabel(app, text="", font=("Helvetica", 18, "bold"))
+finished_label.pack_forget()  # Hide the label initially
+
 # Run button
-ctk.CTkButton(app, text="Run", command=run_conversion).pack(pady=20)
+run_button = ctk.CTkButton(app, text="Run", command=run_conversion)
+run_button.pack(pady=20)
 
 app.mainloop()

@@ -1,6 +1,8 @@
 # gdrive-to-m365  
 **A converter for Google Docs, Sheets, and Slides files to Microsoft Office formats (DOCX, XLSX, PPTX)**
 
+
+To use the program, follow the setup instructions below, then run convert.py from https://github.com/fayaz12g/gdrive-to-m365
 ## Overview
 
 This program helps you convert Google Drive files (Google Docs, Sheets, and Slides) into Microsoft Office-compatible formats (DOCX, XLSX, and PPTX). It automates downloading these files, even if you're not the owner, allowing you to work with them in Microsoft Office applications like Word, Excel, and PowerPoint.
